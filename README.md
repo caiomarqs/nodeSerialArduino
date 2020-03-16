@@ -6,9 +6,9 @@ This project is an example of data interaction between *Arduino* and *Node.js*.
 ```
     npm install
 ```
-- Run de application on *Node.js*:
+- Run de a test of application on *Node.js*:
 ```
-    node index.js
+    npm test
 ```
 
 
@@ -18,29 +18,36 @@ This project is an example of data interaction between *Arduino* and *Node.js*.
 
 This is a quick start, for more information see [Serial Port](https://serialport.io/docs/guide-about) documentation.
 
-- Configure _Serial/USB_ port for listening in `index.js`:
+- Configure _Serial/USB_ port for listening:
 ```
-    const SerialPort = require('serialport')
-
-    const port = new SerialPort('yourSerialPort', {
+    const config = { 
+        log: false, 
+        port: 'yourSerialPort', 
         baudRate: 9600 
-    })
+    }
 ```
 
 - Init connection on _Serial/USB_ port:
 ```
-    port.on('open', (err) => {
-        if (err) {
-            return console.error("Serial Connection -> DON'T WORK: \n" + err.message)
-        }
-        console.log("Serial Connection -> OK!")
-    })
+    const SerialArduinoApp = require('serial-arduino-app')
+
+    const config = { 
+        log: false, 
+        port: 'COM3', 
+        baudRate: 9600 
+    }
+
+    const serialApp = new SerialArduinoApp(config)
+    serialApp.start()
+
 ```
 
 -  Example of data recived from Arduino:
 ```
-    port.on('data', (data) =>{
-        console.log('Data:', data.toString('utf8'))
+    serialApp.emmiter()
+
+    serialApp.on('serial-data', (serialdata) => {
+        console.log(serialdata)
     })
 ```
 
