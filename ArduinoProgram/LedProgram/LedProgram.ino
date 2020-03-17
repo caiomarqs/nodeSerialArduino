@@ -15,10 +15,10 @@ void loop(){
       inString += (char)inChar;
     }
     if (inChar == '\n') {
-      Serial.print("Value:");
-      Serial.print(inString.toInt());
-      Serial.print(" | String: ");
-      Serial.println(inString);
+      //Serial.print("Value:");
+      //Serial.print(inString.toInt());
+      //Serial.print(" | String: ");
+      //Serial.println(inString);
       analogWrite(pwmPin, inString.toInt());
       inString = "";
     }

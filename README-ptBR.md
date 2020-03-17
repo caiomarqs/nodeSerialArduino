@@ -1,5 +1,6 @@
 # Node Serial Arduino
 Esse projeto é um exemplo de interação de dados entre o *Arduino* e o *Node.js*.
+Veja a documentação em [Inglês](./README.md).
 
 ### Rode o projeto
 - Instele todas as dependecias do *Node.js*:
@@ -18,10 +19,11 @@ Esse é um projeto é um projeto inicial, para mais informações veja a documen
 
 - Configurando a porta *Serial/USB*:
 ```
-    const config = { 
-        log: false, 
-        port: 'yourSerialPort', 
-        baudRate: 9600 
+    const config = {
+        log: false,
+        port: 'COM3',
+        baudRate: 9600,
+        serialLog: true
     }
 ```
 
@@ -29,22 +31,35 @@ Esse é um projeto é um projeto inicial, para mais informações veja a documen
 ```
     const SerialArduinoApp = require('serial-arduino-app')
 
-    const config = { 
-        log: false, 
-        port: 'COM3', 
-        baudRate: 9600 
+    const config = {
+        log: false,
+        port: 'COM3',
+        baudRate: 9600,
+        serialLog: true
     }
 
-    const serialApp = new SerialArduinoApp(config)
-    serialApp.start()
+    const serial = new SerialArduinoApp(config)
 ```
 
 -  Exemplo de dados recebidos do arduino:
 ```
-    serialApp.emmiter()
+    serial.reciveDataToSerial() //Start recive data from serialport
 
-    serialApp.on('serial-data', (serialdata) => {
+    serial.on('serial-data', (serialdata) => {
         console.log(serialdata)
     })
+```
+
+- Exemplo de dados enviados para o Arduino:
+```
+    serial.sendDataToSerial() //Start send data to serialport
+
+    const emitter = new EventEmitter() //Use to simulate the event
+    emitter.on('event', () => {
+        setInterval(() => {
+            serial.emit('send-data', '100') //Emit the data to Serial Port
+        }, 50)
+    })
+    emitter.emit('event') // Force the event
 ```
 
