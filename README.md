@@ -6,7 +6,7 @@ This project is an example of data interaction between *Arduino* and *Node.js*. 
 ```
     npm install
 ```
-- Run de a test of application on *Node.js*:
+- Run a test of application on *Node.js*:
 ```
     npm test
 ```
