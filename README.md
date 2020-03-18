@@ -1,4 +1,4 @@
-# Node Serial Arduino
+# Serial Arduino App
 This project is an example of data interaction between *Arduino* and *Node.js*. See this document in [Portuguese](./README-ptBR.md).
 
 ### Run Project
@@ -6,7 +6,7 @@ This project is an example of data interaction between *Arduino* and *Node.js*. 
 ```
     npm install
 ```
-- Run de a test of application on *Node.js*:
+- Run a test of application on *Node.js*:
 ```
     npm test
 ```
@@ -19,7 +19,7 @@ This project is an example of data interaction between *Arduino* and *Node.js*. 
 This is a quick start, for more information see [Serial Port](https://serialport.io/docs/guide-about) documentation.
 
 - Configure _Serial/USB_ port for listening:
-```
+```js
     const config = {
         log: false,
         port: 'COM3',
@@ -29,7 +29,7 @@ This is a quick start, for more information see [Serial Port](https://serialport
 ```
 
 - Init connection on _Serial/USB_ port:
-```
+```js
     const SerialArduinoApp = require('serial-arduino-app')
 
     const config = {
@@ -44,7 +44,7 @@ This is a quick start, for more information see [Serial Port](https://serialport
 ```
 
 -  Example of data recived from Arduino:
-```
+```js
     serial.reciveDataToSerial() //Start recive data from serialport
 
     serial.on('serial-data', (serialdata) => {
@@ -53,7 +53,7 @@ This is a quick start, for more information see [Serial Port](https://serialport
 ```
 
 - Example of data sended to Arduino:
-```
+```js
     serial.sendDataToSerial() //Start send data to serialport
 
     const emitter = new EventEmitter() //Use to simulate the event
